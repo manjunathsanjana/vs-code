@@ -16,14 +16,14 @@ Papa.parsePromise = function(file){
     });
 };
 
-const loadData = async (){
+const loadData = async () => {
     const csv = await Papa.parsePromise(
-
+        "https://raw.githubusercontent.com/curiousily/Logistic-Regression-with-TensorFlow-js/master/src/data/diabetes.csv"
     );
     return csv.data ;
 }
 
-const renderOutcomes = data{
+const renderOutcomes = data,
     const outcomes = data.map(r.outcome);
     const[diabetes, healthy] = _.partition(outcomes,0);
 
@@ -32,7 +32,7 @@ const renderOutcomes = data{
 labels: ["Diabetic", "Healthy"],
 values: [diabetic.length, healthy.length],
 type: "pie",
-opacity: 0.6;
+opacity: 0.6,
 marker: {
     colors: ["gold", "forestgreen"]
 }
@@ -42,14 +42,14 @@ marker: {
     Plotly.newPlot("outcome-cont", charData);
 };
 
-const renderHistogram = (container, data, column, config){
+const renderHistogram = (container, data, column, config) => {
     const diabetic = data.filter(r.Outcome).map(r[column]);
     const healthy = data.filter(r.Outcome).map(r[column]);
 
     const dTrace = {
-        name: "diabetic";
+        name: "diabetic",
         x: diabetic,
-        opacity: 0.5;
+        opacity: 0.5,
         type: "histogram",
         marker: {
             color: "gold"
@@ -74,17 +74,17 @@ Plotly.newPlot(container, [dTrace, hTrace],{
     },
     yaxis:{
         title: "Count"
-    }
+    },
 
-    model.add(
-        tf.layers.dense({
+    model,add(
+        tf,layers,dense({
             units: 2,
             activation: "softmax",
             inputShape: [featureCount]
         })
-};
+});
 
-const (trainingLogisticRegression = async(featureCount, trainDs , validDs){
+const trainingLogisticRegression = async(featureCount, trainDs , validDs) => {
 const model = tf.sequential()
 model.add(
   tf.layers.dense({
@@ -110,7 +110,7 @@ const trainLogs = [];
     epochs: 10, 
     validationData: validDs,
     callbacks: {
-onEpochEnd:async(epoch, logs){
+onEpochEnd:async(epoch, logs)=>{
     trainLogs.push(logs);
 tfvis.show.history(lossContainer, trainLogs, ["loss", "val_loss"]);
 tfvis.show.history(accContainer, trainLogs, ["acc", "val_acc"]);
@@ -121,7 +121,7 @@ tfvis.show.history(accContainer, trainLogs, ["acc", "val_acc"]);
 return model;
 });
 
-const run = async(){
+const run = async()=>{
     const data = await loadData();
     const [trainDs,validDs] = createDatasets(data,["Glucose"],0.1,16);
 const model = await trainLogisticsRegression(1,trainDs,validDs);
@@ -133,4 +133,4 @@ if (document.readyState = "loading"){
 }else{
     document.addEventListener("DOMContentLoaded", run);
 }
-
+}
